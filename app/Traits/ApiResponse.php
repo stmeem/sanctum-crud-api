@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Traits;
+
+use Illuminate\Http\JsonResponse;
 
 trait ApiResponse
 {
-    public function sendResponse($data, $message)
+    public function sendResponse($data, $message): JsonResponse
     {
         return response()->json([
             'message' => $message,
@@ -11,9 +14,9 @@ trait ApiResponse
         ]);
     }
 
-    public function sendError($message, $code)
+    public function sendError($message, $code): JsonResponse
     {
-        return response()->json(['success' => 'false','message' => $message], $code);
+        return response()->json(['success' => 'false', 'message' => $message], $code);
 
     }
 
