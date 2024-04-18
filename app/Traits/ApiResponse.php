@@ -11,17 +11,9 @@ trait ApiResponse
         ]);
     }
 
-    public function sendError($error, $message, $code)
+    public function sendError($message, $code)
     {
-        $response = [
-            'success' => 'false',
-            'message' => $error
-        ];
-
-        if(!empty($message)){
-            $response['data'] = $message;
-        }
-        return response()->json($response, $code);
+        return response()->json(['success' => 'false','message' => $message], $code);
 
     }
 

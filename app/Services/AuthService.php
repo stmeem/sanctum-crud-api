@@ -1,21 +1,32 @@
 <?php
 
 namespace App\Services;
+
 use App\Models\User;
 use App\Traits\ApiResponse;
+use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
-
-
-    public function register($request)
+    public function register($request): array
     {
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('PersonalAccessToken')->plainTextToken;
-        $success['name'] =  $user->name;
+        $data['token'] = $user->createToken('PersonalAccessToken')->plainTextToken;
+        $data['name'] = $user->name;
 
-        return $success;
+        return $data;
+    }
+
+    public function login($request)
+    {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+            $data['token'] = $user->createToken('PersonalAccessToken')->plainTextToken;
+            $data['name'] = $user->name;
+
+            return $data;
+        }
     }
 }
