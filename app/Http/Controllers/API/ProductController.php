@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
+use App\Models\Product;
 use App\Services\ProductService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -38,6 +39,12 @@ class ProductController extends Controller
             return $this->sendError('Product not found', 400);
         }
         return $this->sendResponse(new ProductResource($data), 'Product retrieved successfully');
+    }
+
+    public function update(Request $request, $productID)
+    {
+        $data = $this->productService->updateProduct($request, $productID);
+        return $this->sendResponse(new ProductResource($data), 'Product updated successfully');
     }
 
 }

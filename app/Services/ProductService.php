@@ -22,4 +22,15 @@ class ProductService
     {
         return Product::find($id);
     }
+
+    public function updateProduct($requestData, $productID)
+    {
+        $input = $requestData->all();
+        $product = Product::find($productID);
+        $product->name = $input['name'];
+        $product->detail = $input['detail'];
+        $product->save();
+
+        return $product;
+    }
 }
