@@ -26,7 +26,8 @@ class ProductController extends Controller
         return $this->sendResponse(new ProductResource($data), 'Products retrieved successfully');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $data = $this->productService->storeProduct($request);
         return $this->sendResponse(new ProductResource($data), 'Product added successfully');
     }
@@ -34,7 +35,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $data = $this->productService->showProduct($id);
-        if(is_null($data)){
+        if (is_null($data)) {
             return $this->sendError('Product not found', 400);
         }
         return $this->sendResponse(new ProductResource($data), 'Product retrieved successfully');
