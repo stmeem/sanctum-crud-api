@@ -33,4 +33,10 @@ class ProductService
 
         return $product;
     }
+
+    public function deleteProduct($productId)
+    {
+        $product = Product::find($productId);
+        $product->delete();
+    }
 }

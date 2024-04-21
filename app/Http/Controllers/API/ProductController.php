@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
-use App\Models\Product;
 use App\Services\ProductService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -41,10 +40,16 @@ class ProductController extends Controller
         return $this->sendResponse(new ProductResource($data), 'Product retrieved successfully');
     }
 
-    public function update(Request $request, $productID)
+    public function update(Request $request, $id)
     {
-        $data = $this->productService->updateProduct($request, $productID);
+        $data = $this->productService->updateProduct($request, $id);
         return $this->sendResponse(new ProductResource($data), 'Product updated successfully');
+    }
+
+    public function destroy($id)
+    {
+        $this->productService->deleteProduct($id);
+        return $this->sendResponse([], 'Product deleted successfully.');
     }
 
 }
