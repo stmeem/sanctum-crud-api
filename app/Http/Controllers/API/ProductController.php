@@ -36,7 +36,7 @@ class ProductController extends Controller
     {
         $data = $this->productService->showProduct($id);
         if (is_null($data)) {
-            return $this->sendError('Product not found', 400);
+            return $this->sendError('Product not found');
         }
         return $this->sendResponse(new ProductResource($data), 'Product retrieved successfully');
     }
