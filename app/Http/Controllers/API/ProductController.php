@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -21,6 +23,12 @@ class ProductController extends Controller
     public function index(): JsonResponse
     {
         $data = $this->productService->getProduct();
-        return $this->sendResponse($data, 'Products retrieved successfully');
+        return $this->sendResponse(new ProductResource($data), 'Products retrieved successfully');
     }
+
+    public function store(Request $request){
+        $data = $this->productService->storeProduct($request);
+        return $this->sendResponse(new ProductResource($data), 'Product added successfully');
+    }
+
 }

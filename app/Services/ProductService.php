@@ -11,4 +11,10 @@ class ProductService
     {
         return Product::all();
     }
+
+    public function storeProduct($requestData)
+    {
+        $input = $requestData->all();
+        return Product::create($input);
+    }
 }
