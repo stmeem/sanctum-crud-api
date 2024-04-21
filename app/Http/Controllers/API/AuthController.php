@@ -32,7 +32,7 @@ class AuthController extends Controller
         if($data){
             return $this->sendResponse($data, 'Login Successful');
         } else {
-            return $this->sendError('User credentials did not match.', 401);
+            return $this->sendError('User credentials did not match.');
         }
 
     }

@@ -17,4 +17,9 @@ class ProductService
         $input = $requestData->all();
         return Product::create($input);
     }
+
+    public function showProduct($id)
+    {
+        return Product::find($id);
+    }
 }
